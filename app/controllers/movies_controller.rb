@@ -13,32 +13,24 @@ class MoviesController < ApplicationController
   def index
     @all_ratings = Movie.all_ratings
     
-    @selected_ratings = params[:ratings]
     @sort_column = params[:sort_by]
-    
-    call_redirect = false
-    
-    if @selected_ratings.nil? || @selected_ratings == {}
-      @selected_params = session[:ratings]
-    elsif @selected_ratings != session[:ratings]    
-      session[:ratings] = @selected_ratings
-      call_redirect = true
-    end
-    
     if @sort_column.nil?
       @sort_column = session[:sort_by]
-    elsif @sort_column != session[:sort_by]    
-      session[:sort_by] = @sort_column
-      call_redirect = true
     end
     
-    
+    @selected_ratings = params[:ratings]
     if @selected_ratings.nil? || @selected_ratings == {}
-      @selected_ratings = Hash[@all_ratings.map {|rating| [rating, 1]}]
+      @selected_ratings = session[:ratings]
     end
     
-    if call_redirect
-      redirect_to :ratings => @selected_ratings, :sort_by => @sort_column and return
+    if @selected_ratings == {}
+      @selected_ratings = Hash[@all_ratings.map {|rating| [rating, rating]}]
+    end
+    
+    if params[:sort_by] != session[:sort_by] or params[:ratings] != session[:ratings]
+      session[:sort_by] = @sort_column
+      session[:ratings] = @selected_ratings
+      redirect_to :sort_by => @sort_column, :ratings => @selected_ratings and return
     end
     
     @movies = Movie.where(rating: @selected_ratings.keys).order(@sort_column)
