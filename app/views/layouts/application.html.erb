@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>Menu Bar Default</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="../pages/index">Cupboard Chef</a>
+          </div>
+          <ul class="nav navbar-nav">
+              <li><a href="../pages/addrecipe">Add A Recipe</a></li>
+              <li><a href="../pages/recipelookup">Recipe Lookup</a></li>
+              <li><a href="../pages/weeklyplanner">Weekly Planner</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+              <li><a href="../pages/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+              <li><a href="../pages/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
+        </div>
+    </nav>
+    <%= yield %>
+  </body>
+</html>
