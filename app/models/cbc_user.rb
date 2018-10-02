@@ -1,0 +1,2 @@
+class CbcUser < ApplicationRecord
+end
